@@ -1,21 +1,14 @@
-import "./header.css";
-import logo from "../assets/logo.jpg";
+import "./Header.css";
+import logo from "../assets/logo-color.png";
 import React from "react";
 
 const Header = () => {
   return (
-    <>
-      <header className="header-main">
-        <img className="header-img" src={logo}></img>
-        <span>
-          <select name="support">
-            <option value="Contact Us">Contact Us</option>
-            <option value="Contact Us">Contact Us</option>
-          </select>
-        </span>
-      </header>
-    </>
+    <header>
+      <img className="header-img" alt="Logo" src={logo} />
+      <div className="name">Currency Converter</div>
+      <button className="contact-us">Contact Us</button>
+    </header>
   );
 };
-
 export default Header;
