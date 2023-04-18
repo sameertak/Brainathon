@@ -7,9 +7,9 @@ const Footer = () => {
       <div className="footer-content">
         <p>© 2023 Company, Inc. All rights reserved.</p>
         <ul className="footer-links">
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="https://www.example.com">Terms of Service</a></li>
+          <li><a href="https://www.example.com">Privacy Policy</a></li>
+          <li><a href="https://www.example.com">Cookie Policy</a></li>
         </ul>
       </div>
     </footer>
@@ -17,3 +17,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

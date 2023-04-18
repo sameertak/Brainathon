@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Dashboard-style.css";
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+
 
 const Dashboard = () => {
   const [baseCurrency, setBaseCurrency] = useState("USD");
@@ -9,7 +11,7 @@ const Dashboard = () => {
   const [convertedAmount, setConvertedAmount] = useState(0);
 
   useEffect(() => {
-    fetch(Api)
+    fetch(`https://api.exchangerate-api.com/v4/latest/${baseCurrency}`)
       .then((res) => res.json())
       .then((data) => setRate(data.rates[quoteCurrency]));
   }, [baseCurrency, quoteCurrency]);
@@ -30,6 +32,11 @@ const Dashboard = () => {
     setAmount(event.target.value);
   };
 
+  const handleSwapCurrency = () => {
+    setBaseCurrency(quoteCurrency);
+    setQuoteCurrency(baseCurrency);
+  };
+
   return (
     <div className="dashboard">
       <div className="converter">
@@ -45,8 +52,10 @@ const Dashboard = () => {
             <option value="CHF">CHF</option>
             <option value="CNY">CNY</option>
           </select>
-        </div>
-        <div className="input-group">
+          {/* <button onClick={handleSwapCurrency}>Swap</button> */}
+          {/* <button onClick={handleSwapCurrency}>Swap</button> */}
+
+          <SwapHorizIcon onClick={handleSwapCurrency} />
           <label htmlFor="quote-currency">Quote Currency</label>
           <select id="quote-currency" value={quoteCurrency} onChange={handleQuoteCurrencyChange}>
             <option value="EUR">EUR</option>
@@ -62,18 +71,14 @@ const Dashboard = () => {
         <div className="input-group">
           <label htmlFor="amount">Amount</label>
           <input id="amount" type="number" min="0" step="0.01" value={amount} onChange={handleAmountChange} />
+          <label htmlFor="amount">Amount</label>
+          <input id="amount" type="number" min="0" step="0.01" />
         </div>
+        
         <div className="output">
           <p>
             {amount} {baseCurrency} = {convertedAmount} {quoteCurrency}
           </p>
-        </div>
-        <div className="input-group">
-          <button onClick={() => {
-            const temp = baseCurrency;
-            setBaseCurrency(quoteCurrency);
-            setQuoteCurrency(temp);
-          }}>Convert</button>
         </div>
       </div>
     </div>

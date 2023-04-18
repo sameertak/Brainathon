@@ -8,9 +8,9 @@ header {
   }
   
   .header-img {
-    height: 4rem;
-    width: 6rem;
-    margin-left: 20px;
+    height: 5rem;
+    width: 7rem;
+    margin-left: 96px;
   }
   
   .name {
@@ -34,3 +34,4 @@ header {
   background-color: #333;
   color: #fff;
   }
+

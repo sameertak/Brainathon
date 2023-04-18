@@ -5,6 +5,7 @@
     padding: 20px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px; 
+    
   }
   .converter {
     display: flex;
@@ -13,21 +14,24 @@
     margin-top: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 20px;
+    padding: 60px;
     width: 50%;
     background-color: antiquewhite;
+    box-shadow: 3px 3px 5px 12px #ccc;
   }
   
   .input-group {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 37px;
+
   }
   
-  label {
+  label:first-child {
     margin-right: 10px;
   }
+  
   
   select,
   input {
@@ -35,27 +39,16 @@
     padding: 5px;
     border: none;
     border-radius: 5px;
-    background-color: #f5f5f5;
+    margin-right: 20px;
+    background-color: white;
+    flex-basis: 60%;
   }
+
+  label {
+    margin-left: 20px;
+}
   
-  select:focus,
-  input:focus {
-    outline: none;
-  }
-  
-  select {
-    min-width: 80px;
-    max-width: 120px;
-  }
-  
-  .input-group:first-child {
-    margin-top: 0;
-  }
-  
-  .output {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 20px;
-    text-align: center;
-  }
+
+
+
   
