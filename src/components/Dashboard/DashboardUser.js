@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [convertedAmount, setConvertedAmount] = useState(0);
 
   useEffect(() => {
-    fetch(`https://api.exchangeratesapi.io/latest?base=${baseCurrency}&symbols=${quoteCurrency}`)
+    fetch(Api)
       .then((res) => res.json())
       .then((data) => setRate(data.rates[quoteCurrency]));
   }, [baseCurrency, quoteCurrency]);
@@ -30,10 +30,6 @@ const Dashboard = () => {
     setAmount(event.target.value);
   };
 
-  const handleConvertClick = () => {
-    setConvertedAmount((amount * rate).toFixed(2));
-  };
-
   return (
     <div className="dashboard">
       <div className="converter">
@@ -43,6 +39,11 @@ const Dashboard = () => {
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
             <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+            <option value="CAD">CAD</option>
+            <option value="AUD">AUD</option>
+            <option value="CHF">CHF</option>
+            <option value="CNY">CNY</option>
           </select>
         </div>
         <div className="input-group">
@@ -51,17 +52,28 @@ const Dashboard = () => {
             <option value="EUR">EUR</option>
             <option value="USD">USD</option>
             <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+            <option value="CAD">CAD</option>
+            <option value="AUD">AUD</option>
+            <option value="CHF">CHF</option>
+            <option value="CNY">CNY</option>
           </select>
         </div>
         <div className="input-group">
           <label htmlFor="amount">Amount</label>
           <input id="amount" type="number" min="0" step="0.01" value={amount} onChange={handleAmountChange} />
         </div>
-        <button className="convert-button" onClick={handleConvertClick}>Convert</button>
         <div className="output">
           <p>
             {amount} {baseCurrency} = {convertedAmount} {quoteCurrency}
           </p>
+        </div>
+        <div className="input-group">
+          <button onClick={() => {
+            const temp = baseCurrency;
+            setBaseCurrency(quoteCurrency);
+            setQuoteCurrency(temp);
+          }}>Convert</button>
         </div>
       </div>
     </div>
@@ -69,3 +81,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
