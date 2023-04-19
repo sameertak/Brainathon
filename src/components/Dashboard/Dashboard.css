@@ -1,0 +1,30 @@
+.dashboard {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.converter {
+  display: flex;
+  background-color: whitesmoke;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 5px -2.5px black;
+  padding: 2.5rem;
+  display: flex;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,4 +1,4 @@
-import "./Header.css";
+import "./header.css";
 import logo from "../assets/logo2.png";
 import React from "react";
 
@@ -12,4 +12,3 @@ const Header = () => {
   );
 };
 export default Header;
-

@@ -1,8 +1,8 @@
-import './App.css';
-import Header from "./components/header/Header";
-import Dashboard from "./components/Dashboard/DashboardUser"
-import Footer from "./components/Footer/Footer";
-import CurrencyTable from './components/CurrencyTable/CurrencyTable';
+import "./App.css";
+import Header from "./components/header/header";
+import Dashboard from "./components/dashboard/DashboardUser";
+import Footer from "./components/footer/Footer";
+import CurrencyTable from "./components/CurrencyTable/CurrencyTable";
 
 function App() {
   return (

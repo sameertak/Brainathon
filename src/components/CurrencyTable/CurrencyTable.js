@@ -1,77 +1,96 @@
-import React, { useState } from 'react';
-import './CurrencyTable.css';
+import React, { useState, useEffect } from "react";
+import "./CurrencyTable.css";
+import { Col, Form, Pagination, Row } from "react-bootstrap";
+import { MenuItem } from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 function CurrencyTable() {
-  const [country, setCountry] = useState('USD');
-  const [rates, setRates] = useState({
-    'USD': 1.00,
-    'EUR': 0.83,
-    'JPY': 109.95,
-    'GBP': 0.72,
-  });
+  const [fromCountry, setFromCountry] = useState([]);
+  const [country, setCountry] = useState("USD");
+  const [tableData, setTableData] = useState();
+  const [countryCode, setCountryCode] = useState();
 
-  const handleCountryChange = (event) => {
-    setCountry(event.target.value);
-    // You would typically fetch the new exchange rates for the selected country
-    // from an API and update the state with the new rates.
-    // For the sake of simplicity, we'll just use some hardcoded rates here.
-    if (event.target.value === 'USD') {
-      setRates({
-        'USD': 1.00,
-        'EUR': 0.83,
-        'JPY': 109.95,
-        'GBP': 0.72,
-      });
-    } else if (event.target.value === 'EUR') {
-      setRates({
-        'USD': 1.20,
-        'EUR': 1.00,
-        'JPY': 131.17,
-        'GBP': 0.86,
-      });
-    } else if (event.target.value === 'JPY') {
-      setRates({
-        'USD': 0.0091,
-        'EUR': 0.0076,
-        'JPY': 1.00,
-        'GBP': 0.0065,
-      });
-    } else if (event.target.value === 'GBP') {
-      setRates({
-        'USD': 1.39,
-        'EUR': 1.16,
-        'JPY': 153.59,
-        'GBP': 1.00,
-      });
-    }
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // useEffect(() => {
+  //   if (fromCountry.length > 0) {
+  //     countryId(fromCountry[0].country_id);
+  //   }
+  // }, [fromCountry]);
+
+  const fetchData = async () => {
+    const res = await fetch(`http://127.0.0.1:8000/superadmin/getcountry/`, {
+      method: "GET",
+    });
+    const result = await res.json();
+    setFromCountry(result.data);
+  };
+
+  const countryId = async (e) => {
+    setCountryCode(e);
+    console.log(e);
+
+    const res = await fetch(`http://127.0.0.1:8000/superadmin/userrates/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from_id: e,
+      }),
+    });
+    const result = await res.json();
+    setTableData(result.data);
   };
 
   return (
     <div className="currency-table">
       <h2>Currency Exchange Rates</h2>
-      <label className='select-contry'>
-        Select a country
-        <select value={country} onChange={handleCountryChange}>
-          <option value="USD">United States Dollar (USD)</option>
-          <option value="EUR">Euro (EUR)</option>
-          <option value="JPY">Japanese Yen (JPY)</option>
-          <option value="GBP">British Pound Sterling (GBP)</option>
-        </select>
-      </label>
+      <FormControl sx={{ m: 1, minWidth: 200 }}>
+        <InputLabel
+          id="demo-simple-select-helper-label"
+          style={{ backgroundColor: "white", padding: "0 0.45rem" }}
+        >
+          Select Country
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          name="from_currency"
+          onChange={(e) => {
+            countryId(e.target.value);
+          }}
+        >
+          {fromCountry
+            ? fromCountry.map((d, id) => (
+                <MenuItem key={id} value={d.country_id}>
+                  {d.country_name} ({d.country_id})
+                </MenuItem>
+              ))
+            : null}
+        </Select>
+      </FormControl>
+
       <table>
         <thead>
           <tr>
             <th>Country</th>
-            <th>Exchange Rate ({country})</th>
+            <th>Exchange Rate ({countryCode})</th>
           </tr>
         </thead>
         <tbody>
-          {Object.keys(rates).map((rateCountry) => (
-            <tr key={rateCountry}>
-              <td>{rateCountry}</td>
-              <td>{rates[rateCountry]}</td>
-            </tr>
-          ))}
+          {tableData
+            ? tableData.map((d, id) => (
+                <tr key={id}>
+                  <td>{d.to_id}</td>
+                  <td>{parseFloat(d.rate).toFixed(3)}</td>
+                </tr>
+              ))
+            : null}
         </tbody>
       </table>
     </div>

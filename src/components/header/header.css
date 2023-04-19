@@ -2,24 +2,25 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #d3c8c8;
+  background-color: rgb(199 210 254);
   padding: 10px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .header-img {
-    height: 5rem;
-    width: 7rem;
-    margin-left: 96px;
-  }
-  
-  .name {
-    font-size: 31px;
+  z-index: 100;
+}
+
+.header-img {
+  height: 5rem;
+  width: 7rem;
+  /* margin-left: 96px; */
+}
+
+.name {
+  font-size: 31px;
   font-weight: bold;
-  font-family: 'Montserrat', sans-serif;
-  }
-  
-  .contact-us {
+  font-family: "Montserrat", sans-serif;
+}
+
+.contact-us {
   font-size: 16px;
   border: none;
   border-radius: 25px;
@@ -28,10 +29,9 @@ header {
   padding: 10px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  }
-  
-  .contact-us:hover {
+}
+
+.contact-us:hover {
   background-color: #333;
   color: #fff;
-  }
-
+}
