@@ -13,10 +13,11 @@ class CountryModel(models.Model):
 
 
 class ExchangeModel(models.Model):
-    country_name=models.ForeignKey(CountryModel, on_delete=models.CASCADE)
+    # country_name=models.ForeignKey(CountryModel, on_delete=models.CASCADE)
     from_id = models.CharField(max_length=3)
     to_id = models.CharField(max_length=3)
     rate = models.FloatField(null=True)
+    status = models.BooleanField(default=True)
 
     def __str__(self):
         return f'{self.from_id} to {self.to_id}'
