@@ -1,0 +1,16 @@
+node_modules
+package-lock.json
+.env
+build
+.next
+__pycache__
+Procfile
+db.sqlite3
+staticfiles
+creds.py
+.DS_Store
+dist
+dist-ssr
+*.local
+feedback
+server
